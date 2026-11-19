@@ -1,10 +1,11 @@
-package explorador.modelo;
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package prueba.Logica;
 /**
- * Se lanza cuando una ruta, un nombre o una operación sobre archivos no es válida:
- * ruta vacía, inexistente o que no es un directorio, nombre con caracteres prohibidos,
- * elemento que ya existe, archivo que no se puede editar, etc.
- * El mensaje explica el motivo y está pensado para mostrarse tal cual al usuario.
+ *
+ * @author Abril
  */
 public class RutaInvalidaException extends Exception {
 

@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class VentanaPrincipal extends JFrame{
     public static Font titulo = new Font("Impact",Font.BOLD, 22);
-    public static Color titColor = new Color(24, 42, 58);
+    public static Color titColor = new Color(20, 42, 60);
     public static Font subTitulo = new Font("Impact",Font.PLAIN, 10);
     public static Font texto = new Font("Impact",Font.PLAIN,14);
     
@@ -30,6 +30,7 @@ public class VentanaPrincipal extends JFrame{
         tit.setHorizontalAlignment(SwingConstants.CENTER);
         tit.setForeground(titColor);
         tit.setFont(titulo);
+        
         this.add(tit);
         gbc.gridy++;
         this.add(tit);

@@ -1,9 +1,11 @@
-package explorador.modelo;
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package prueba.Logica;
 /**
- * Se lanza cuando los criterios de búsqueda no son coherentes: números negativos o mal
- * escritos, tamaño mínimo mayor que el máximo, fechas invertidas o con formato incorrecto.
- * El mensaje explica el motivo y está pensado para mostrarse tal cual al usuario.
+ *
+ * @author Abril
  */
 public class FiltroInvalidoException extends Exception {
 

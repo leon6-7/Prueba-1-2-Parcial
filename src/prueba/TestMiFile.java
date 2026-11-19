@@ -8,7 +8,10 @@ import java.io.IOException;
 import prueba.Vista.VentanaPrincipal;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+/**
+ *
+ * @author Abril
+ */
 public class TestMiFile {
     static MiFile mf = new MiFile();
     static Scanner lea = new Scanner(System.in);
