@@ -2,7 +2,10 @@ package prueba.Logica;
 
 import java.util.Date;
 import java.util.Locale;
-
+/**
+ *
+ * @author Abril
+ */
 public class Filtro {
 
     private String texto;

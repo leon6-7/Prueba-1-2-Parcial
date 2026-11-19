@@ -9,14 +9,15 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
-
-/** Guarda la bitácora, la configuración y los reportes de la aplicación. */
+/**
+ *
+ * @author Abril
+ */
 public class Persistencia {
 
     private final File archivoBitacora;
     private final File archivoConfiguracion;
 
-    /** Usa los nombres bitacora.log y config.txt dentro de la carpeta indicada. */
     public Persistencia(File carpetaDatos) throws RutaInvalidaException {
         if (carpetaDatos == null) throw new RutaInvalidaException("Debe indicar la carpeta de datos.");
         if (!carpetaDatos.exists() && !carpetaDatos.mkdirs()) {
@@ -27,12 +28,10 @@ public class Persistencia {
         archivoConfiguracion = new File(carpetaDatos, "config.txt");
     }
 
-    /** Constructor práctico que usa la carpeta actual del programa. */
     public Persistencia() throws RutaInvalidaException {
         this(new File("."));
     }
 
-    /** Registra una acción agregándola al final de bitacora.log. */
     public void registrarOperacion(String accion, String ruta) throws RutaInvalidaException {
         String fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(archivoBitacora, true))) {
@@ -43,7 +42,6 @@ public class Persistencia {
         }
     }
 
-    /** Lee todo el contenido de la bitácora para mostrarlo en la aplicación. */
     public String leerBitacora() throws RutaInvalidaException {
         if (!archivoBitacora.exists()) return "";
         StringBuilder texto = new StringBuilder();
@@ -56,7 +54,6 @@ public class Persistencia {
         }
     }
 
-    /** Guarda la última ruta y los filtros actuales en formato clave=valor. */
     public void guardarConfiguracion(String ruta, Filtro filtro) throws RutaInvalidaException {
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(archivoConfiguracion))) {
             escritor.write("ruta=" + limpiar(ruta)); escritor.newLine();
@@ -73,7 +70,6 @@ public class Persistencia {
         }
     }
 
-    /** Lee config.txt y devuelve sus valores en un mapa de clave y valor. */
     public Map<String, String> leerConfiguracion() throws RutaInvalidaException {
         Map<String, String> configuracion = new java.util.HashMap<>();
         if (!archivoConfiguracion.exists()) return configuracion;
@@ -89,7 +85,6 @@ public class Persistencia {
         }
     }
 
-    /** Exporta las estadísticas a un archivo .txt o .csv. */
     public void exportarReporte(File destino, Estadisticas estadisticas) throws RutaInvalidaException {
         if (destino == null || estadisticas == null) throw new RutaInvalidaException("Faltan datos para exportar el reporte.");
         String extension = NodoArchivo.extensionDe(destino.getName());

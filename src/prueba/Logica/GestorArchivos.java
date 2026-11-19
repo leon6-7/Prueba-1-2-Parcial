@@ -10,15 +10,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Ejecuta operaciones sobre archivos y carpetas usando java.io.File.
- * Esta clase no muestra diálogos: la vista debe pedir confirmación antes de
- * llamar a eliminar o a una operación que sobrescriba un destino.
+ *
+ * @author Abril
  */
 public class GestorArchivos {
 
     private static final long TAMANO_MAXIMO_TEXTO = 5L * 1024L * 1024L;
 
-    /** Crea una carpeta y permite crear también las carpetas intermedias. */
     public File crearCarpeta(String ruta) throws RutaInvalidaException {
         File carpeta = validarNombreDestino(ruta);
         if (carpeta.exists()) throw new RutaInvalidaException("Ya existe un elemento con esa ruta.");
@@ -26,7 +24,6 @@ public class GestorArchivos {
         return carpeta;
     }
 
-    /** Crea un archivo de texto y escribe su contenido. */
     public File crearArchivoTexto(String ruta, String contenido) throws RutaInvalidaException {
         File archivo = validarNombreDestino(ruta);
         if (archivo.exists()) throw new RutaInvalidaException("Ya existe un elemento con esa ruta.");
@@ -43,7 +40,6 @@ public class GestorArchivos {
         }
     }
 
-    /** Renombra un archivo o carpeta dentro de su ubicación actual. */
     public File renombrar(File origen, String nuevoNombre) throws RutaInvalidaException {
         validarOrigen(origen);
         if (nuevoNombre == null || nuevoNombre.trim().isEmpty() || contieneCaracterInvalido(nuevoNombre.trim())) {
@@ -55,7 +51,6 @@ public class GestorArchivos {
         return destino;
     }
 
-    /** Copia un archivo o carpeta. El destino debe ser una ruta que aún no exista. */
     public File copiar(File origen, File destino) throws RutaInvalidaException {
         validarOrigen(origen);
         if (destino == null) throw new RutaInvalidaException("La ruta de destino no es válida.");
@@ -86,7 +81,6 @@ public class GestorArchivos {
         }
     }
 
-    /** Mueve un elemento. Si renameTo no funciona, copia y luego elimina el origen. */
     public File mover(File origen, File destino) throws RutaInvalidaException {
         validarOrigen(origen);
         if (destino == null || destino.exists()) throw new RutaInvalidaException("El destino no es válido o ya existe.");
@@ -104,7 +98,6 @@ public class GestorArchivos {
         }
     }
 
-    /** Elimina un archivo o carpeta y todo su contenido. La confirmación corresponde a la vista. */
     public void eliminar(File elemento) throws RutaInvalidaException {
         validarOrigen(elemento);
         eliminarRecursivo(elemento);
@@ -119,7 +112,6 @@ public class GestorArchivos {
         if (!elemento.delete()) throw new RutaInvalidaException("No se pudo eliminar: " + elemento);
     }
 
-    /** Lee un archivo de texto. Rechaza archivos mayores de 5 MB. */
     public String leerTexto(File archivo) throws RutaInvalidaException {
         validarOrigen(archivo);
         if (!archivo.isFile()) throw new RutaInvalidaException("La ruta seleccionada no es un archivo.");
@@ -135,7 +127,6 @@ public class GestorArchivos {
         }
     }
 
-    /** Guarda texto en un archivo existente o nuevo. Sobrescribir requiere confirmación previa en la vista. */
     public void guardarTexto(File archivo, String contenido) throws RutaInvalidaException {
         if (archivo == null) throw new RutaInvalidaException("Debe indicar un archivo.");
         File padre = archivo.getParentFile();
