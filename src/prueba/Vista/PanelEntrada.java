@@ -11,7 +11,6 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
-/** Campos para elegir la carpeta y aplicar filtros. */
 public class PanelEntrada extends JPanel {
 
     public final JTextField ruta = new JTextField(34);

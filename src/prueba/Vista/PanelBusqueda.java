@@ -4,7 +4,7 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.util.*;
 import prueba.Logica.*;
-/** Tabla ordenable de resultados. */
+
 public class PanelBusqueda extends JPanel {
     public final DefaultTableModel modelo=new DefaultTableModel(new String[]{"Nombre","Ruta absoluta","Tamaño","Modificado"},0) {
         public boolean isCellEditable(int r,int c) {

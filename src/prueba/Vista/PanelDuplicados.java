@@ -4,7 +4,7 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.io.*;
 import java.util.*;
-/** Grupos de archivos con el mismo nombre y tamaño. */
+
 public class PanelDuplicados extends JPanel {
     public final DefaultTableModel modelo=new DefaultTableModel(new String[]{"Grupo","Archivo","Ruta","Bytes"},0) {
         public boolean isCellEditable(int r,int c) {

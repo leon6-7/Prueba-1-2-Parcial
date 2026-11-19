@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import prueba.controlador.Controlador;
-/** Editor de texto y visor de bitácora. */
+
 public class VisorTexto extends JPanel {
     public final JTextArea editor=new JTextArea();
     public final JButton guardar=Estilo.boton("Guardar cambios"),actualizar=Estilo.boton("Ver bitácora");

@@ -3,7 +3,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import prueba.Logica.*;
-/** Estadísticas por extensión y resumen global. */
+
 public class PanelEstadisticas extends JPanel {
     public final DefaultTableModel modelo=new DefaultTableModel(new String[]{"Categoría","Archivos","Tamaño","Porcentaje"},0) {
         public boolean isCellEditable(int r,int c) {

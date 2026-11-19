@@ -6,7 +6,7 @@ import java.text.*;
 import java.util.*;
 import prueba.Logica.*;
 import prueba.controlador.Controlador;
-/** Ventana principal con pestañas y distribución GridBagLayout. */
+
 public class VentanaPrincipal extends JFrame implements Controlador.Listener {
     public static Font titulo=Estilo.TITULO,subTitulo=Estilo.SUBTITULO,texto=Estilo.TEXTO;
     public static Color titColor=Estilo.AZUL;
@@ -59,19 +59,51 @@ public class VentanaPrincipal extends JFrame implements Controlador.Listener {
         setVisible(true);
     }
     private void conectarAcciones() {
-        entrada.seleccionar.addActionListener(e->{JFileChooser c=new JFileChooser();c.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);if(c.showOpenDialog(this)==JFileChooser.APPROVE_OPTION)entrada.ruta.setText(c.getSelectedFile().getAbsolutePath());});
+        entrada.seleccionar.addActionListener(
+                e->{JFileChooser c=new JFileChooser();c.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                if(c.showOpenDialog(this)==JFileChooser.APPROVE_OPTION)entrada.ruta.setText(c.getSelectedFile().getAbsolutePath());});
+        
         entrada.analizar.addActionListener(e->ejecutar(()->controlador.analizar(entrada.ruta.getText(),(Integer)entrada.profundidad.getValue())));
+ 
         entrada.cancelar.addActionListener(e->controlador.cancelarRecorrido());
-        entrada.buscar.addActionListener(e->ejecutar(()->{aplicarFiltro();controlador.buscar();pestanas.setSelectedComponent(busqueda);}));
-        duplicados.detectar.addActionListener(e->ejecutar(()->{controlador.detectarDuplicados();pestanas.setSelectedComponent(duplicados);}));
-        estadisticas.exportar.addActionListener(e->ejecutar(()->{JFileChooser c=new JFileChooser();if(c.showSaveDialog(this)==JFileChooser.APPROVE_OPTION)controlador.exportarReporte(c.getSelectedFile());}));
-        arbol.crearCarpeta.addActionListener(e->ejecutar(()->{String s=JOptionPane.showInputDialog(this,"Ruta completa de la nueva carpeta:");if(s!=null){controlador.crearCarpeta(s);refrescar();}}));
-        arbol.crearArchivo.addActionListener(e->ejecutar(()->{String s=JOptionPane.showInputDialog(this,"Ruta completa del nuevo archivo .txt:");if(s!=null){String contenido=JOptionPane.showInputDialog(this,"Contenido inicial:");if(contenido!=null){controlador.crearArchivoTexto(s,contenido);refrescar();}}}));
-        arbol.renombrar.addActionListener(e->ejecutar(()->{File f=requerirSeleccion();String s=JOptionPane.showInputDialog(this,"Nuevo nombre:",f.getName());if(s!=null){controlador.renombrar(f,s);refrescar();}}));
-        arbol.copiar.addActionListener(e->ejecutar(()->{File f=requerirSeleccion();JFileChooser c=new JFileChooser();c.setSelectedFile(new File(f.getParentFile(),f.getName()+"_copia"));if(c.showSaveDialog(this)==JFileChooser.APPROVE_OPTION){File d=c.getSelectedFile();if(d.exists())throw new IllegalArgumentException("El destino ya existe. Seleccione otro nombre.");controlador.copiar(f,d);refrescar();}}));
-        arbol.mover.addActionListener(e->ejecutar(()->{File f=requerirSeleccion();JFileChooser c=new JFileChooser();c.setSelectedFile(f);if(c.showSaveDialog(this)==JFileChooser.APPROVE_OPTION){File d=c.getSelectedFile();if(d.exists())throw new IllegalArgumentException("El destino ya existe. Seleccione otro nombre.");controlador.mover(f,d);refrescar();}}));
-        arbol.eliminar.addActionListener(e->ejecutar(()->{File f=requerirSeleccion();if(confirmar("¿Eliminar definitivamente "+f.getName()+"?")){controlador.eliminar(f);refrescar();}}));
-        arbol.abrir.addActionListener(e->ejecutar(()->{visor.abrir(requerirSeleccion());pestanas.setSelectedComponent(visor);}));
+ 
+        entrada.buscar.addActionListener(e->ejecutar(()->{
+            aplicarFiltro();controlador.buscar();pestanas.setSelectedComponent(busqueda);}));
+   
+        duplicados.detectar.addActionListener(e->ejecutar(()->{
+            controlador.detectarDuplicados();pestanas.setSelectedComponent(duplicados);}));
+ 
+        estadisticas.exportar.addActionListener(e->ejecutar(()->{
+            JFileChooser c=new JFileChooser();if(c.showSaveDialog(this)==JFileChooser.APPROVE_OPTION)controlador.exportarReporte(c.getSelectedFile());}));
+  
+        arbol.crearCarpeta.addActionListener(e->ejecutar(()->{
+            String s=JOptionPane.showInputDialog(this,"Ruta completa de la nueva carpeta:");
+            if(s!=null){controlador.crearCarpeta(s);refrescar();}}));
+ 
+        arbol.crearArchivo.addActionListener(e->ejecutar(()->{
+            String s=JOptionPane.showInputDialog(this,"Ruta completa del nuevo archivo .txt:");
+            if(s!=null){String contenido=JOptionPane.showInputDialog(this,"Contenido inicial:");if(contenido!=null){controlador.crearArchivoTexto(s,contenido);refrescar();}}}));
+   
+        arbol.renombrar.addActionListener(e->ejecutar(()->{
+            File f=requerirSeleccion();String s=JOptionPane.showInputDialog(this,"Nuevo nombre:",f.getName());
+            if(s!=null){controlador.renombrar(f,s);refrescar();}}));
+  
+        arbol.copiar.addActionListener(e->ejecutar(()->{
+            File f=requerirSeleccion();JFileChooser c=new JFileChooser();c.setSelectedFile(new File(f.getParentFile(),f.getName()+"_copia"));
+            if(c.showSaveDialog(this)==JFileChooser.APPROVE_OPTION){File d=c.getSelectedFile();
+            if(d.exists())throw new IllegalArgumentException("El destino ya existe. Seleccione otro nombre.");controlador.copiar(f,d);refrescar();}}));
+  
+        arbol.mover.addActionListener(e->ejecutar(()->{
+            File f=requerirSeleccion();JFileChooser c=new JFileChooser();c.setSelectedFile(f);
+            if(c.showSaveDialog(this)==JFileChooser.APPROVE_OPTION){File d=c.getSelectedFile();
+            if(d.exists())throw new IllegalArgumentException("El destino ya existe. Seleccione otro nombre.");controlador.mover(f,d);refrescar();}}));
+  
+        arbol.eliminar.addActionListener(e->ejecutar(()->{
+            File f=requerirSeleccion();
+            if(confirmar("¿Eliminar definitivamente "+f.getName()+"?")){controlador.eliminar(f);refrescar();}}));
+    
+        arbol.abrir.addActionListener(e->ejecutar(()->{
+            visor.abrir(requerirSeleccion());pestanas.setSelectedComponent(visor);}));
     }
     private File requerirSeleccion() {
         File f=arbol.seleccionado();

@@ -3,7 +3,7 @@ import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.*;
 import prueba.Logica.*;
-/** Árbol de carpetas y botones de gestión. */
+
 public class PanelArbol extends JPanel {
     public final JTree arbol=new JTree(new DefaultMutableTreeNode("Sin análisis"));
     public final JButton crearCarpeta=Estilo.boton("Nueva carpeta"),crearArchivo=Estilo.boton("Nuevo texto"),renombrar=Estilo.boton("Renombrar"),copiar=Estilo.boton("Copiar"),mover=Estilo.boton("Mover"),eliminar=Estilo.boton("Eliminar"),abrir=Estilo.boton("Abrir texto");
